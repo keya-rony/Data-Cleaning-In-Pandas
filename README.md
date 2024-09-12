@@ -141,7 +141,9 @@ Lastly, resetting the index before the providing the final call list to the clie
 df = df.reset_index(drop = True)
 df
 ```
-This concludes the Data Cleaning exercise resulting into a clean call list that can be used by the client.
+This concludes the Data Cleaning exercise resulting into a clean call list that can be used by the client as shown in the output below.
+
+![Alt text](./images/your-image.png)
 
 
 
