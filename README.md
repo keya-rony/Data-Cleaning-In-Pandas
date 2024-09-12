@@ -27,4 +27,44 @@ The following are the data cleaning steps taken from start to end to obatined th
 4. Fixing Datatypes
 5. Handling Missing values
 
+#### Loading the Data
+```python
+import pandas as pd
+
+df = pd.read_csv('Customer Call List.xlsx')
+df.head()
+```
+After loading the data I carried out some data exploration to understanding the data contents
+```python
+df.info()
+```
+
+```python
+df.shape
+```
+#### Checking for duplicates and Removing duplicates
+```python
+df.duplicated().sum()
+```
+The data returned one duplicate value, which I proceeded to drop
+```python
+df = df.drop_duplicates()
+```
+#### Removing the unnecessary column(s)
+Considering what the report is going to be used for, I removed columns that are not necessary. The only columns necessary are CustomerID, FirstName,LastName,Phone_Number,Address, PayingCustomer and DoNotContact
+```python
+df = df.drop(columns = "Not_Useful_Column")
+df
+```
+#### Fixing the Last_Name Column
+The Last_Name column contained unwanted characters like _, / and ... on the left and right. I applied the strip("123") method to remove any leading or trailing characters in the string that match the ones inside the quotes. In this case, to strip any leading or trailing 1, 2, 3, ., _, or / from the values in the 'Last_Name' column..
+
+```python
+df = df['Last_Name'].str.strip("123._/")
+df
+```
+#### Fixing the Phone Number Column
+The phone number column contains unwanted characters such as / and | as shown below
+
+![Alt text](./images/your-image.png)
 
