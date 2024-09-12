@@ -1,5 +1,5 @@
 # Data-Cleaning-In-Pandas
-Data Cleaning In Pandas Project
+
 
 
 ## Project Overview
@@ -143,7 +143,12 @@ df
 ```
 This concludes the Data Cleaning exercise resulting into a clean call list that can be used by the client as shown in the output below.
 
-![Alt text](./images/your-image.png)
+![Alt text](cleanlist.png)
 
+### Conclusion
+Conclusion
+This project highlighted the importance of data cleaning in ensuring the quality and usability of a dataset for analysis. By using pandas, I was able to transform an unstructured and inconsistent dataset into a clean and well-organized one, ready for use by the sales team in their upcoming marketing campaign.
+
+In addition to refining my pandas skills, this project reinforced the value of methodical data preparation in enhancing the accuracy and effectiveness of any analysis. Looking ahead, I plan to apply these skills to more complex datasets and explore additional features of pandas to further optimize the data cleaning process.
 
 
