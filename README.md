@@ -66,5 +66,82 @@ df
 #### Fixing the Phone Number Column
 The phone number column contains unwanted characters such as / and | as shown below
 
-![Alt text](./images/your-image.png)
+![Alt text](output.png)
+Proceed to clean the Phone_Number column to have all values consistent in the format 123-545-5421 using lamda fnction.
+
+First, format the column to a string
+
+```python
+df["Phone_Number"] = df["Phone_Number"].apply(lambda x:str(x))
+
+df["Phone_Number"] = df["Phone_Number"].apply(lambda x:x[0:3] + '-' + x[3:6] + '-'+x[6:10] )
+df
+
+```
+Lastly, replacing NA values
+```python
+df["Phone_Number"] = df["Phone_Number"].str.replace('nan--','')
+
+df["Phone_Number"] = df["Phone_Number"].str.replace('Na--','')
+df
+
+```
+#### Adding Columns
+The marketing team may need specific address columns such as State, Street adress and Zip code. I proceed to split the Adress which is delimited by a comma to obtain these additional columns.
+
+```python
+df[["Street_Address","State","Zip_Code"]] = df["Address"].str.split(',',2,expand = True)
+df
+```
+#### Fixing the Paying Customer and Do_Not_Contact
+These two columns contain NaN values and a mix of Yes, Y, No and N. Using str.replace method to ensure consistency for Yes and No values.
+
+```python
+df['Paying Customer'] = df['Paying Customer'].str.replace('Yes','Y')
+
+df['Paying Customer'] = df['Paying Customer'].str.replace('No','N')
+
+df['Do_Not_Contact'] = df['Do_Not_Contact'].str.replace('Yes','Y')
+
+df['Do_Not_Contact'] = df['Do_Not_Contact'].str.replace('No','N')
+
+df
+```
+#### Fixing NA values across the dataset
+
+```python
+df = df.replace('N/a','')
+df = df.fillna('')
+df
+```
+
+#### Valid Call list
+We need to provide the client with a list that only contains customers they can call. The Do_Not_Contact column indicates whether a customer should be contacted or not. Using a loop to drop those customers that should not be contacted from the list.
+
+```python
+for x in df.index:
+    if df.loc[x,"Do_Not_Contact"] == 'Y':
+        df.drop(x, inplace = True)
+```
+Then proceed to drop those customers without phone numbers
+
+```python
+for x in df.index:
+    if df.loc[x,"Phone_Number"] == '':
+        df.drop(x, inplace = True)
+        
+#Alternatively
+
+df = df.dropna(subset = "Phone_Number", inplace = True)
+```
+#### Bringing it all up together
+Lastly, resetting the index before the providing the final call list to the client
+
+```python
+df = df.reset_index(drop = True)
+df
+```
+This concludes the Data Cleaning exercise resulting into a clean call list that can be used by the client.
+
+
 
